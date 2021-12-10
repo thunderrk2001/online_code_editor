@@ -1,0 +1,24 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  background-color: #ebf1fc;
+}
+.wrapper{
+  display: flex;
+
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+}
+.editor{
+
+  display: block;
+  border: 1px solid grey;
+  width: 90%;
+  height: 500px;
+}
+.editor_heading{
+
+}
