@@ -2,9 +2,6 @@
 using namespace std;
 int main()
 {
-int a=10;
-while(a--)
-cout<<a
-
-
+for(int i=0;i<100000000000;i++)
+int ans=i;
 }

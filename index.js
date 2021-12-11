@@ -19,11 +19,10 @@ app.post("/cpp",async(req,res)=>{
     const compile=await cpp.writeCode(code)
     const writeInput= await compile()
     const execCode=await writeInput('')
-    const data=await execCode()
-    console.log(data);
-    res.send({"ok":data})
+    const data=await execCode();
+    res.send({"OUTPUT":data})
   } catch (e) {
-    res.send({"ok":e})
+    res.send({"ERROR":e.toString()})
   }
 })
 app.get("/java",(req,res)=>{
