@@ -1,6 +1,7 @@
 const {exec,spawn}=require("child_process")
 const path=require('path')
 const cpp=require("./lib/cpp.js")
+const {createUnique}=require("./lib/randomString.js")
 const express=require("express");
 const app=express()
 app.use(express.json({limit: "50mb",}))
@@ -16,11 +17,11 @@ app.use(express.urlencoded({
 app.post("/cpp",async(req,res)=>{
   const code=req.body.code
   try {
+    const name=createUnique()
     const compile=await cpp.writeCode(code)
-    const writeInput= await compile()
-    const execCode=await writeInput('')
-    const data=await execCode();
-    res.send({"OUTPUT":data})
+    const execCode= await compile(name)
+    const data=await execCode(name,'');
+    res.send({"ERROR":null,"OUTPUT":data})
   } catch (e) {
     res.send({"ERROR":e.toString()})
   }

@@ -1,24 +1,70 @@
 *{
   margin: 0px;
   padding: 0px;
-  background-color: #ebf1fc;
-}
-.wrapper{
-  display: flex;
 
+}
+#run_btn{
+  padding: 5px;
+  display: block;
+  margin: auto;
+}
+.header{
+  display:block;
+  margin: auto;
+  font-size: 30px;
+  text-align: center;
+}
+.space{
+  display: block;
+  width: 0%;
+  height: 10%;
+}
+.flex1{
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row;
+  width: 100%;
+  height: 100%;
+}
+#editor {
+  width: 65%;
+  height:500px;
+}
+#ioBlock{
+  margin-left: 5px;
+  display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  padding: 20px;
-}
-.editor{
+width: 20%;
+height: 500px;}
+.ioBlock{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 
-  display: block;
-  border: 1px solid grey;
-  width: 90%;
-  height: 500px;
+  height: 50%;
+  width: 100%;
 }
-.editor_heading{
-
+.ioBlock > .heading{
+  font-family: monospace;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  padding: 4px;
+}
+#input{
+height: 90%;
+width: 100%;
+overflow: scroll;
+background-color: #f4f4f4;
+}
+#output{
+height: 90%;
+width: 100%;
+overflow: scroll;
+background-color: #f4f4f4;
 }
