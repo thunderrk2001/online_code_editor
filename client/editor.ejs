@@ -8,34 +8,54 @@
 <div class="header">
   Thunder code editor
 </div>
-<div class="flex1">
-  <div id="editor" draggable="true">function foo(items) {
-      var x = "All this is syntax highlighted";
-      return x;
-  }</div>
-
-  <div id="ioBlock">
-    <div class="ioBlock">
-      <div class="heading">
-        INPUT
-      </div>
-      <div id="input" contenteditable="true">
+<div class="flex">
+  <div class="boxHeading">
+      <div class="space1">
 
       </div>
-    </div>
-    <div class="ioBlock">
-      <div class="heading">
-        OUTPUT
-      </div>
-      <div id="output">
+      <select id="language" name="lang">
+        <option value="c_cpp">cpp</option>
+        <option value="java">java</option>
+        <option value="python">python</option>
+      </select>
 
+      <select id="theme" name="theme">
+        
+      </select>
+
+
+
+  </div>
+  <div class="flex1">
+    <div id="editor" draggable="true">function foo(items) {
+        var x = "All this is syntax highlighted";
+        return x;
+    }</div>
+
+    <div id="ioBlock">
+      <div class="ioBlock">
+        <div class="heading">
+          INPUT
+        </div>
+        <div id="input" contenteditable="true">
+
+        </div>
+      </div>
+      <div class="ioBlock">
+        <div class="heading">
+          OUTPUT
+        </div>
+        <div id="output">
+
+        </div>
       </div>
     </div>
   </div>
+  <button id="run_btn">
+  RUN
+  </button>
 </div>
-<button id="run_btn">
-RUN
-</button>
+
 
 <script src="/ace-builds-master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascript/editor.js",type="text/javascript",charset="utf-8">
