@@ -6,6 +6,8 @@
 #run_btn{
   padding: 5px;
   display: block;
+  background-color: black;
+  color: white;
   margin: auto;
 }
 .header{

@@ -1,6 +1,7 @@
 const {exec,spawn}=require("child_process")
 const path=require('path')
 const cpp=require("./lib/cpp.js")
+const java=require('./lib/java.js')
 const {createUnique}=require("./lib/randomString.js")
 const express=require("express");
 const app=express()
@@ -14,22 +15,32 @@ app.use(express.urlencoded({
     limit: "50mb",
     parameterLimit: "50000"
 }));
-app.post("/cpp",async(req,res)=>{
+app.post("/c_cpp",async(req,res)=>{
   const code=req.body.code
+  const input=req.body.input
   try {
     const name=createUnique()
     const compile=await cpp.writeCode(code)
     const execCode= await compile(name)
-    const data=await execCode(name,'');
+    const data=await execCode(name,input);
     res.send({"ERROR":null,"OUTPUT":data})
   } catch (e) {
     res.send({"ERROR":e.toString()})
   }
 })
-app.get("/java",(req,res)=>{
-
+app.post("/java",async(req,res)=>{
+  const code=req.body.code
+  let input=""
+  input=req.body.input
+  try {
+  const runJavaInTime= await java.writeCode(code)
+  const data=await runJavaInTime(input)
+  res.send({"ERROR":null,"OUTPUT":data})
+  } catch (e) {
+  res.send({"ERROR":e.toString()})
+  }
 })
-app.get("/py",(req,res)=>{
+app.post("/python",(req,res)=>{
 
 })
 app.get("/",(req,res)=>{

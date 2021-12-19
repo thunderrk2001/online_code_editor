@@ -18,7 +18,6 @@ themes.forEach((theme) => {
   themeSelectEle.appendChild(option)
 
 });
-
 }
 function setTheme(value) {
   editor.setTheme(`ace/theme/${value}`);
@@ -27,30 +26,56 @@ document.getElementById('theme').addEventListener('input',(event)=>{
   const themeValue=event.target.value
   setTheme(themeValue)
 })
+function toggleRun() {
+    const ele= document.getElementById('run_btn')
+    if(this.status==true){
+    ele.style.opacity='0.5'
+    ele.innerText='Running.....'
+ele.style.pointerEvents="none"
+  }
+    else {
+      ele.style.opacity='1'
+      ele.innerText='RUN'
+      ele.style.pointerEvents="initial"
+    }
+}
 document.getElementById('run_btn').addEventListener("click",async()=>{
-await runCode()
+toggleRun.call({"status":true})
+const lang=document.getElementById('language').value
+await runCode(lang)
+toggleRun.call({"status":false})
 })
-async function runCode() {
+async function runCode(lang) {
   const code=editor.getValue().toString()
+  const input=document.getElementById('input').innerText.toString()
   try{
-  const rawResponse = await fetch("http://localhost:2000/cpp", {
+  const rawResponse = await fetch(`http://localhost:2000/${lang}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:
-              JSON.stringify({"code":code})
+              JSON.stringify({"code":code,"input":input})
           });
             if(rawResponse.ok)
             {
               const result=await rawResponse.json()
-              if(result["ERROR"]!=null)
-              document.getElementById('output').innerText=(result["ERROR"])
+              if(result["ERROR"]!=null){ changefontColor(true,document.getElementById('output'))
+              document.getElementById('output').innerText=(result["ERROR"])}
               else
-              document.getElementById('output').innerText=(result["OUTPUT"])
+              {  changefontColor(false,document.getElementById('output'))
+                document.getElementById('output').innerText=(result["OUTPUT"])}
             }}
             catch(e){
               console.log(e);
         }
+
+}
+function changefontColor(isBlack,ele) {
+if(isBlack)
+ele.style.color="RED"
+else {
+  ele.style.color="Black"
+}
 }
