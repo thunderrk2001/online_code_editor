@@ -35,6 +35,7 @@ app.post("/java",async(req,res)=>{
   try {
   const runJavaInTime= await java.writeCode(code)
   const data=await runJavaInTime(input)
+  console.log(data.length);
   res.send({"ERROR":null,"OUTPUT":data})
   } catch (e) {
   res.send({"ERROR":e.toString()})
