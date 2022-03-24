@@ -2,6 +2,7 @@ const path = require('path')
 const port = 2000
 const cpp = require("./lib/cpp.js")
 const java = require('./lib/java.js')
+const py = require("./lib/python.js")
 const { createUnique } = require("./lib/randomString.js")
 const express = require("express");
 const app = express()
@@ -21,7 +22,6 @@ app.post("/c_cpp", async(req, res) => {
     const input = req.body.input
     try {
         const name = createUnique()
-        console.log(name)
         const compile = await cpp.writeCode(code)
         const execCode = await compile(name)
         const data = await execCode(name, input);
@@ -37,14 +37,22 @@ app.post("/java", async(req, res) => {
     try {
         const runJavaInTime = await java.writeCode(code)
         const data = await runJavaInTime(input)
-        console.log(data.length);
         res.send({ "ERROR": null, "OUTPUT": data })
     } catch (e) {
         res.send({ "ERROR": e.toString() })
     }
 })
-app.post("/python", (req, res) => {
-
+app.post("/python", async(req, res) => {
+    const code = req.body.code
+    let input = ""
+    input = req.body.input
+    try {
+        const runPyInTime = await py.writeCode(code)
+        const data = await runPyInTime(input)
+        res.send({ "ERROR": null, "OUTPUT": data })
+    } catch (e) {
+        res.send({ "ERROR": e.toString() })
+    }
 })
 app.get("/", (req, res) => {
     res.render("editor.ejs")

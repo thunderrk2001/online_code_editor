@@ -18,7 +18,7 @@ int main()
 {
    /*Your code goes here*/
 }`,
-        "python": "/*write code here*/"
+        "python": "#write code here"
     }
 
     function main() {
