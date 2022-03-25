@@ -1,2 +1,2 @@
 
-print("hello py");
+print(input("enter somthing"));

@@ -63,7 +63,7 @@ int main()
         const code = editor.getValue().toString()
         const input = document.getElementById('input').innerText.toString()
         try {
-            const rawResponse = await fetch(`http://localhost:2000/${lang}`, {
+            const rawResponse = await fetch(`/${lang}`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

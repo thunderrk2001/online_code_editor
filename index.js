@@ -1,5 +1,5 @@
 const path = require('path')
-const port = 2000
+const port = process.env.PORT || 2000
 const cpp = require("./lib/cpp.js")
 const iL = require('./lib/interpretedLang.js')
 const { createUnique } = require("./lib/randomString.js")
