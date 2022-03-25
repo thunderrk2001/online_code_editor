@@ -1,8 +1,7 @@
 const path = require('path')
 const port = 2000
 const cpp = require("./lib/cpp.js")
-const java = require('./lib/java.js')
-const py = require("./lib/python.js")
+const iL = require('./lib/interpretedLang.js')
 const { createUnique } = require("./lib/randomString.js")
 const express = require("express");
 const app = express()
@@ -35,7 +34,8 @@ app.post("/java", async(req, res) => {
     let input = ""
     input = req.body.input
     try {
-        const runJavaInTime = await java.writeCode(code)
+        const writeCode = iL.setInterpretedLang('java', 'java')
+        const runJavaInTime = await writeCode(code)
         const data = await runJavaInTime(input)
         res.send({ "ERROR": null, "OUTPUT": data })
     } catch (e) {
@@ -47,7 +47,8 @@ app.post("/python", async(req, res) => {
     let input = ""
     input = req.body.input
     try {
-        const runPyInTime = await py.writeCode(code)
+        const writeCode = iL.setInterpretedLang('python', 'py')
+        const runPyInTime = await writeCode(code)
         const data = await runPyInTime(input)
         res.send({ "ERROR": null, "OUTPUT": data })
     } catch (e) {
